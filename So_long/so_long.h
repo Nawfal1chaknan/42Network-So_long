@@ -6,7 +6,7 @@
 /*   By: nchaknan <nchaknan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:47:43 by nchaknan          #+#    #+#             */
-/*   Updated: 2023/02/25 22:36:24 by nchaknan         ###   ########.fr       */
+/*   Updated: 2023/02/28 02:07:21 by nchaknan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include "mlx.h"
 # include <stdlib.h>
-# include "./get_next_line/get_next_line.h"
 # include <stdio.h>
+# include "./get_next_line/get_next_line.h"
+# include "./ft_printf/ft_printf.h"
 
 # define PLAYER_ERR "Your map must have one starting position, you have : "
 # define COINS_ERR "Your map must have at least one collectible, you have : "
@@ -30,6 +31,7 @@
 
 typedef struct list
 {
+	char	*map_name;
 	char	**array;
 	char	**fakearray;
 	void	*mlx;

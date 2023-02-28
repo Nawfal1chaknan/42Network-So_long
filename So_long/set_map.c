@@ -6,20 +6,40 @@
 /*   By: nchaknan <nchaknan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:23:07 by nchaknan          #+#    #+#             */
-/*   Updated: 2023/02/25 22:36:24 by nchaknan         ###   ########.fr       */
+/*   Updated: 2023/02/28 02:11:25 by nchaknan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	check_map_format(char *av)
+{
+	int		i;
+	char	point;
+	char	b;
+	char	e;
+	char	r;
+
+	i = map_strlen(av) - 1;
+	point = av[i - 3];
+	b = av[i - 2];
+	e = av[i - 1];
+	r = av[i];
+	if (point != '.' || b != 'b' || e != 'e' || r != 'r')
+	{
+		ft_printf("Your map file should be in .ber format !\n");
+		exit(1);
+	}	
+}
 
 void	read_map(t_mylist *myList, char **array)
 {
 	int	fd;
 	int	i;
 
-	fd = open("map.ber", O_RDONLY);
+	fd = open(myList->map_name, O_RDONLY);
 	myList->height = count_lines(fd);
-	fd = open("map.ber", O_RDONLY);
+	fd = open(myList->map_name, O_RDONLY);
 	i = 0;
 	while (i < myList->height)
 	{
@@ -30,6 +50,7 @@ void	read_map(t_mylist *myList, char **array)
 
 void	identify_map(t_mylist *myList)
 {
+	check_map_format(myList->map_name);
 	myList->array = malloc(sizeof(char *) * 1024);
 	read_map(myList, myList->array);
 	myList->width = map_strlen(myList->array[0]);
